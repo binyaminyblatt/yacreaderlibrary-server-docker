@@ -7,6 +7,8 @@ WORKDIR git
 # Update system
 RUN apt-get update && \
     apt-get -y install git qt5-default libpoppler-qt5-dev libpoppler-qt5-1 wget unzip libqt5sql5-sqlite libqt5sql5 sqlite3 libqt5network5 libqt5gui5 libqt5core5a build-essential
+RUN apt-get install sudo
+RUN apt-get install nano
 RUN git clone https://github.com/YACReader/yacreader.git . && \
     git checkout 9.5.0
 RUN cd compressed_archive/unarr/ && \
@@ -33,3 +35,4 @@ EXPOSE 8080
 ENV LC_ALL=C.UTF8
 
 ENTRYPOINT ["YACReaderLibraryServer","start"]
+CMD ["YACReaderLibraryServer add-library YAC /comics"]
